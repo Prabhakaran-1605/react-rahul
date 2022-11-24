@@ -3,6 +3,7 @@ import Navbar from './Navbar/Navbar'
 import Home from './components/Home'
 import About from './components/About'
 import Contact from './components/Contact'
+import User from './User/User'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 const App = () => {
     return <React.Fragment>
@@ -12,6 +13,7 @@ const App = () => {
                 <Route path="/home" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/contact" component={Contact} />
+                <Route path="/user" component={User} />
             </Switch>
         </Router>
     </React.Fragment>
