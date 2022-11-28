@@ -1,61 +1,58 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
 class User extends Component {
-    state;
-    constructor(props) {
-        super(props)
-        console.log("First Const")
-        this.state = {
-            users: []
-        }
+    state = {
+        user: {}
     }
     componentDidMount() {
-        console.log("Third")
-        Axios.get('https://jsonplaceholder.typicode.com/users')
+        Axios.get('https://dummyjson.com/users')
             .then((response) => {
+                console.log(response.data)
                 this.setState({
-                    users: response.data
+                    user: response.data
                 })
             })
             .catch()
     }
     render() {
-        console.log("Second Render method")
         return (
-            <div>
-
-                <h1>User Component</h1>
-                <pre>{JSON.stringify(this.state)}</pre>
-
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <table className="table table-hover">
-                                <thead className="bg-dark text-white">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        this.state.users.map((user) => {
-                                            return <tr>
-                                                <td>{user.id}</td>
-                                                <td>{user.name}</td>
-                                                <td>{user.email}</td>
-                                            </tr>
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8">
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    Object.keys(this.state.user).length > 0 ?
+                                        <>
+                                            {
+                                                this.state.user.users.map((userObj) => {
+                                                    return <tr>
+                                                        <td>{userObj.id}</td>
+                                                        <td>{userObj.firstName}</td>
+                                                        <td>{userObj.email}</td>
+                                                        <td>{userObj.gender}</td>
+                                                    </tr>
+                                                })
+                                            }
+                                        </> : null
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
+                <pre>{JSON.stringify(this.state.user)}</pre>
+
             </div>
         )
     }
 }
-
 export default User
